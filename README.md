@@ -5,7 +5,7 @@ Code implemented based on [Deep Person ReID](https://github.com/KaiyangZhou/deep
 2. pip install -r requirement.txt
 3. conda install your-version-pytorch
 4. python demo.py (set test-only and visrank to true)
-## Findings & Results
+## Findings
 Trained and tested 6 different models with different loss function on iLIDS Video Dataset. All models are trained with same hyper-parameter to compare performance:
 
 - batch size: 8 
@@ -14,6 +14,7 @@ Trained and tested 6 different models with different loss function on iLIDS Vide
 - optimizer: adam
 - start learning rate: 0.0001
 
+### Results
 The results shown as follows:
 
 | Model        |  mAP  |  Rank 1|
@@ -29,6 +30,23 @@ The results shown as follows:
 The reason why choose these models is to compare the the types of classification method and ReID specific one since
 the task is video-based with single camera, I want to prove that the models using the spatial and temporal information
 within the video (ResNet50Mid) could have better performance compared with other single-frame models (ResNet101).
+
+### Compare with traditional trackers
+Traditional trackers like Deepsort works in a 2-stage method. There will algorithms to detect objects in current frame first,
+then utilized filters to predict tracks status based on previous frames and match with current detections.
+On the other hand, deep ReID models studied the features from the input videos and output the predictions directly, which is an end-to-end method.
+
+Therefore, compared to ReID models, traditional trackers obviously is easier to implement and train considering the boost in object
+detection models in recent years. But it can be slower in detection speed compared to ReID models
+since it requires matching between trakcers and detections. 
+
+Besides, traditional trackers are more easily influenced by the variation of input videos like weather or image resolution. This is because
+the filters used is dependent on the color distribution of input images. When the images have noises, the filters could has misleading results
+and deteriorate the predictions.
+
+For ReID methods, the models could integrate other information of person like pose, action to improve the predictions when
+the input varies. However, these models could be large and have requirement on hardware computation capacity, which makes
+them harder to deploy.
 
 ## Reasons of Implementation
 I choose [Deep Person ReID](https://github.com/KaiyangZhou/deep-person-reid) for implementation because it support different dataset with
