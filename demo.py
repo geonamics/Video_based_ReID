@@ -13,12 +13,12 @@ def main():
         batch_size_test=8,
         transforms=['random_flip', 'random_crop']
     )
-    models=['resnet101']
+    models=['resnet50mid']
     for m in models:
         model = torchreid.models.build_model(
             name=m,
             num_classes=datamanager.num_train_pids,
-            loss='softmax',
+            loss='tripet',
             pretrained=True
         )
 
@@ -43,7 +43,7 @@ def main():
             scheduler=scheduler,
             label_smooth=True
         )
-        path=os.path.join('log',m,'softmax')
+        path=os.path.join('log',m,'tripet')
         engine.run(
             save_dir=path,
             max_epoch=60,
