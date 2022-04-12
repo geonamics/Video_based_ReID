@@ -11,7 +11,7 @@ batch size:8, image size:128*128, epoch:60, optimizer: adam, start learning rate
 The results shown as follows:
 
 | Model        |  mAP  |  Rank 1|
-| :--------  | :-----  | :----:  | :----:  |
+| :--------    | :-----  | :----  |
 | OSNet _x1_0 (S) | 0.7328 |0.6267|
 | OSNet _x1_0 (T) | 0.727 |0.6333|
 | ResNet50Mid(S) | 0.7596 |0.6467|
